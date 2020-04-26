@@ -45,15 +45,15 @@ nfl.LFQ.btx_uq <- nfl.all.LFQ_uq[!duplicated(nfl.LFQ.btx_uq$Gene), ]
 dim(nfl.LFQ.btx_uq) # 4711   13
 
 head(nfl.LFQ.btx_uq)
-#colnames(nfl.LFQ.btx)[7:12] <- paste0("WT",".", paste0(rep("LKO",6),1:6))
+colnames(nfl.LFQ.btx_uq)[7:12] <- paste0("WT",".", paste0(rep("LKO",6),1:6))
 
-colnames(nfl.LFQ.btx)
+colnames(nfl.LFQ.btx_uq)
 
-colnames(nfl.LFQ.btx)[1:13] <- paste0(colnames(nfl.LFQ.btx)[1:13], ".btx")
-head(nfl.LFQ.btx)
+colnames(nfl.LFQ.btx_uq)[1:12] <- paste0(colnames(nfl.LFQ.btx_uq)[1:12], ".btx")
+head(nfl.LFQ.btx_uq)
 
-#row.names(nfl.LFQ.btx_uq) <- nfl.LFQ.btx_uq$Gene
-#head(nfl.LFQ.btx_uq)
+row.names(nfl.LFQ.btx_uq) <- nfl.LFQ.btx_uq$Gene; nfl.LFQ.btx_uq <- nfl.LFQ.btx_uq[,-13]
+head(nfl.LFQ.btx_uq)
 
 #nfl.LFQ.btx_uq <- nfl.LFQ.btx_uq[,-13]
 #head(nfl.LFQ.btx_uq)
