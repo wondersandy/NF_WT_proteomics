@@ -30,19 +30,19 @@ dim(tko.all.nbt) # 3953   37
 ## Removing unwanted columns from each data set before combining them
 nfl.LFQ.btx <- nfl.all.btx[,c(1:12,22,23)]
 head(nfl.LFQ.btx)
-#row.names(nfl.LFQ.btx) <- nfl.all.btx$Uniprot # NO Duplicate warning
-#sum(duplicated(nfl.all.btx$Gene)) # 27
-#sum(is.na(nfl.all.btx$Gene)) # 27
-#sum(nfl.all.btx$Gene == "") # NA
+row.names(nfl.LFQ.btx) <- nfl.all.btx$Gene # Duplicate warning
+sum(duplicated(nfl.all.btx$Gene)) # 27
+sum(is.na(nfl.all.btx$Gene)) # 27
+sum(nfl.all.btx$Gene == "") # NA
 
-#nfl.all.btx[duplicated(nfl.all.btx$Gene) | duplicated(nfl.all.btx$Gene, fromLast = T), c(1:12,23)]
+nfl.all.btx[duplicated(nfl.all.btx$Gene) | duplicated(nfl.all.btx$Gene, fromLast = T), c(1:12,23)]
 
-#nfl.LFQ.btx_uq <- nfl.all.btx_uq[!is.na(nfl.all.btx_uq$Gene), c(1:12,23)]
-#dim(nfl.LFQ.btx_uq) # 4712   13
+nfl.LFQ.btx_uq <- nfl.all.btx_uq[!is.na(nfl.all.btx_uq$Gene), c(1:12,23)]
+dim(nfl.LFQ.btx_uq) # 4711   13
 
-#sum(duplicated(nfl.LFQ.btx_uq$Gene)) # 1
-#nfl.LFQ.btx_uq <- nfl.all.LFQ_uq[!duplicated(nfl.LFQ.btx_uq$Gene), ]
-#dim(nfl.LFQ.btx_uq) # 4711   13
+sum(duplicated(nfl.LFQ.btx_uq$Gene)) # 1
+nfl.LFQ.btx_uq <- nfl.all.LFQ_uq[!duplicated(nfl.LFQ.btx_uq$Gene), ]
+dim(nfl.LFQ.btx_uq) # 4711   13
 
 head(nfl.LFQ.btx)
 colnames(nfl.LFQ.btx)[7:12] <- paste0("WT",".", paste0(rep("LKO",6),1:6))
