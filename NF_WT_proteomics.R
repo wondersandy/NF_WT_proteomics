@@ -70,25 +70,28 @@ library(preprocessCore)
 
 ina.LFQ.btx <- ina.all.btx[,c(1:12,24,25)]
 head(ina.LFQ.btx)
-#row.names(ina.LFQ.btx) <- ina.all.btx$Uniprot # NO Duplicate warning
-#sum(duplicated(ina.all.btx$Gene)) # 20
-#sum(is.na(ina.all.btx$Gene)) # 21
-#sum(ina.all.btx$Gene == "") # NA
+row.names(ina.LFQ.btx) <- ina.all.btx$Gene # Duplicate warning
+sum(duplicated(ina.all.btx$Gene)) # 20
+sum(is.na(ina.all.btx$Gene)) # 21
+sum(ina.all.btx$Gene == "") # NA
 
-#ina.all.btx[is.na(ina.all.btx$Gene), 1:25]
-#ina.all.btx[duplicated(ina.all.btx$Gene) | duplicated(ina.all.btx$Gene, fromLast = T), 1:25]
+ina.all.btx[is.na(ina.all.btx$Gene), c(1:12,24,25)]
+# All these genes are NAs and corresponding Uniprots doesn't annotate for any gene (rather pseudogenes etc.)
+ina.all.btx[duplicated(ina.all.btx$Gene) | duplicated(ina.all.btx$Gene, fromLast = T), c(1:12,24,25)]
 
-#nfl.LFQ.btx_uq <- nfl.all.btx_uq[!is.na(nfl.all.btx_uq$Gene), c(1:12,23)]
-#dim(nfl.LFQ.btx_uq) # 4712   13
+ina.LFQ.btx_uq <- ina.all.btx[!is.na(ina.all.btx$Gene), c(1:12,25)]
+head(ina.LFQ.btx_uq)
+dim(nfl.LFQ.btx_uq) # 4712   13
 
-#sum(duplicated(nfl.LFQ.btx_uq$Gene)) # 1
+sum(duplicated(ina.LFQ.btx_uq$Gene)) # 0
 #nfl.LFQ.btx_uq <- nfl.all.LFQ_uq[!duplicated(nfl.LFQ.btx_uq$Gene), ]
 #dim(nfl.LFQ.btx_uq) # 4711   13
 
 #head(nfl.LFQ.btx)
 
-#row.names(nfl.LFQ.btx_uq) <- nfl.LFQ.btx_uq$Gene
-#head(nfl.LFQ.btx_uq)
+row.names(ina.LFQ.btx_uq) <- ina.LFQ.btx_uq$Gene; ina.LFQ.btx_uq <- ina.LFQ.btx_uq[,-13]
+head(ina.LFQ.btx_uq)
+dim(ina.LFQ.btx_uq) # 3802   12
 
 #nfl.LFQ.btx <- nfl.LFQ.btx[,-13]
 #head(nfl.LFQ.btx)
